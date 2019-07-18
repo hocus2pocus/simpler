@@ -47,8 +47,9 @@ module Simpler
       View.new(@request.env).render(binding)
     end
 
-    def params
-      @request.params
+    def params(key)
+      # @request.params
+      @request.env['simpler.router_params'][key]
     end
 
     def render(template)
