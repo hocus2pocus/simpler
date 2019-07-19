@@ -28,6 +28,7 @@ module Simpler
 
     def call(env)
       route = @router.route_for(env)
+      return not_found_route(env) if route.nil?
       controller = route.controller.new(env)
       action = route.action
 
@@ -52,6 +53,10 @@ module Simpler
 
     def make_response(controller, action)
       controller.make_response(action)
+    end
+
+    def not_found_route(env)
+      [404, {}, []]
     end
 
   end
